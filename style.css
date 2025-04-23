@@ -23,6 +23,15 @@ body{
     justify-content: center;
 }
 
+canvas{
+    display: block;
+    margin: auto;
+}
+.sketch{
+    display: block;
+    margin: auto;
+}
+
 nav{
     /* background-color: bisque; */
     font-family: "Courier Prime", monospace;
@@ -37,7 +46,7 @@ nav{
     justify-content: space-evenly;
 }
 
-main{
+.main{
     margin: auto;
     margin-top: 10%;
     width: 50%;
