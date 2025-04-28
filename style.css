@@ -31,6 +31,9 @@ canvas{
     display: block;
     margin: auto;
 }
+/* script{
+    display: block
+} */
 
 nav{
     /* background-color: bisque; */
@@ -69,15 +72,23 @@ a:visited{
     text-decoration: none;
 }
 
-#crawl{
-    background-color: #160F29;
+#start{
+    margin: auto;
+    display: block;
+    background-color: #6BD424;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
 }
-#crawl h1{
-    color: #FFFFFF;
+#start:hover{
+    margin: auto;
+    display: block;
+    background-color: #489713;
+    padding: 15px;
+    padding-left: 35px;
+    padding-right: 35px;
 }
-#crawl h2{
-    color: #FFFFFF;
-}
-#crawl a{
-    color: #FFFFFF;
+#startbutton{
+    position: absolute;
+    bottom: 25px;
 }
