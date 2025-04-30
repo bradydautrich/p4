@@ -1,3 +1,12 @@
+//brady dautrich
+
+/*
+  Code assisted by ChatGPT (OpenAI). Prompts that directly influenced this sketch:
+ - Make a dropdown that avoids the mouse when it gets too close
+ - How can I an option that disables the dropdown and turns it red
+ - Keep the dropdown from going off screen
+*/
+
 var dropdown;
 var arrowX, arrowY;
 var escapeDistance = 200;
@@ -69,4 +78,3 @@ function mouseMoved() {
     dropdown.position(arrowX, arrowY);
   }
 }
-
