@@ -30,6 +30,16 @@ body{
     justify-content: center;
 }
 
+footer{
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+}
+
+.logo{
+    padding-top: 12px;
+}
+
 canvas{
     display: block;
     margin: auto;
@@ -49,7 +59,8 @@ nav{
     font-style: normal;
     font-size: 20px;
     margin: auto;
-    margin-top: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     width: 80%;
     display: flex;
     flex-direction: row;
@@ -58,7 +69,7 @@ nav{
 
 .main{
     margin: auto;
-    margin-top: 5%;
+    padding: 5%;
     width: 80%;
     display: flex;
     flex-direction: column;
