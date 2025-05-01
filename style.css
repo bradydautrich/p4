@@ -78,7 +78,6 @@ nav{
 
 img{
     margin: auto;
-    padding-top: 16px;
 }
 
 a{
@@ -193,4 +192,14 @@ a:visited{
 
 #Terms{
     align-self: center;
+}
+
+#watermarkOverlay{
+    position:absolute; 
+    top:129px; 
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:999;
 }

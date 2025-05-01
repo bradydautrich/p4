@@ -23,8 +23,16 @@
             <a href="crawl.html">Outro Crawl</a>
         </nav>
         <div class="sketch">
+            <img id="watermarkOverlay" alt="Watermark overlay"/>
             <script src="sketch.js"></script>
         </div>
+        <script>
+            const img = document.getElementById('watermarkOverlay');
+            const storedData = localStorage.getItem('wmImage');
+            if (storedData) {
+              img.src = storedData;
+            }
+        </script>          
     </body>
     <footer>
         <a href="about.html">ⓘ</a>
