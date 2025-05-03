@@ -1,3 +1,16 @@
+//brady dautrich
+
+/*
+  This script was developed with the help of ChatGPT (OpenAI), based on the following prompts:
+  - "I want to build a watermark builder in JavaScript using p5.js that has options for custom text, orientation (diagonal or straight), line style (dashed, solid, none), opacity slider, and font selection."
+  - "Add options for custom text, orientation (diagonal or straight), line style (dashed, solid, none), opacity slider, and font selection"
+  - "Create a live preview window using p5.js with these inputs"
+  - "Make sure the watermark can be stored as a transparent image for use on the next page"
+  - "Add line weight and line density options to the UI"
+  - "why is my sketch not centering properly"
+*/
+
+
 let inputText, fontSelect, fontSizeSelect, textDensitySlider;
 let orientationRadio, lineStyleRadio, opacitySlider, lineWeightSelect, lineDensitySlider;
 let previewGraphics;

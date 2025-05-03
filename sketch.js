@@ -1,5 +1,4 @@
 //brady dautrich
-//
 
 /*
   Code assisted by ChatGPT (OpenAI). Prompts that directly influenced this sketch:
@@ -55,6 +54,10 @@ function setup() {
   noStroke();
 }
 
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function adjustFontSizeToFit() {
   var testSize = fontSize;
   var bounds1 = font.textBounds(line1, 0, 0, testSize);
@@ -73,12 +76,15 @@ function draw() {
   for (var p of particles) {
     // Stronger cursorpush with wider radius
     var d = dist(mouseX, mouseY, p.pos.x, p.pos.y);
+    
     if (d < 50) {
       var cursorpush = p5.Vector.sub(p.pos, createVector(mouseX, mouseY));
-      cursorpush.setMag(180 / (d + 1)); // stronger knockback
+      cursorpush.setMag(180 / (d + 1));
       p.vel.add(cursorpush);
       p.settled = false;
-    }
+      p.lastDisturbed = millis(); // update disturbance time
+  }
+
 
     p.update();
     p.show();
@@ -92,6 +98,8 @@ class Particle {
     this.vel = p5.Vector.random2D().mult(random(1, 3));
     this.acc = createVector();
     this.settled = false;
+    this.lastDisturbed = -Infinity;
+    this.settledAt = -1;
   }
 
   update() {
@@ -99,22 +107,39 @@ class Particle {
     var distToTarget = toTarget.mag();
 
     if (distToTarget < 2 && this.vel.mag() < 0.3) {
-      this.settled = true;
+      if (!this.settled) {
+        this.settled = true;
+        this.settledAt = millis(); // mark when it settles
+      }
       this.pos = this.target.copy();
       this.vel.set(0, 0);
     } else {
-      toTarget.setMag(0.5); // still a pull toward home
+      this.settled = false;
+      this.settledAt = -1; // reset if disturbed
+      toTarget.setMag(0.5);
       this.acc.add(toTarget);
       this.vel.add(this.acc);
-      this.vel.mult(0.85); // quick return damping
+      this.vel.mult(0.85);
       this.pos.add(this.vel);
       this.acc.mult(0);
     }
   }
 
   show() {
-    var d = dist(mouseX, mouseY, this.pos.x, this.pos.y);
-    fill(this.vel.mag() > 0.5 ? color(255, 0, 0) : 0);
+    let fadeDuration = 1500; // 3 seconds fade
+    let alpha;
+
+    if (this.settled && this.settledAt !== -1) {
+      let timeSinceSettled = millis() - this.settledAt;
+      alpha = map(timeSinceSettled, 0, fadeDuration, 255, 0);
+      alpha = constrain(alpha, 0, 255);
+    } else {
+      alpha = 255; // fully red while moving
+    }
+
+    let col = lerpColor(color(255, 0, 0), color(0), 1 - alpha / 255);
+    fill(col);
+
     textSize(24);
     text('©', this.pos.x, this.pos.y);
   }

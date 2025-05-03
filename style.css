@@ -190,6 +190,15 @@ a:visited{
     font-size: 14px;
 }
 
+#about{
+    width: 60%;
+    padding-top: 5%;
+    font-family: "Courier Prime", monospace;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
 #Terms{
     align-self: center;
 }

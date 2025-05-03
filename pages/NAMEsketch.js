@@ -1,3 +1,14 @@
+//brady dautrich
+
+/*
+  This code was developed with the assistance of ChatGPT based on the following prompts:
+  1. "can you give me a p5.js name input screen that saves the name to local storage and then goes to another page"
+  2. "can you also make the submit button green, and change to a darker green when you hover"
+  3. "can you give the input field and button some nicer styling too? light gray background and no outline for the input"
+  4. "can you use a custom font like Courier and center the input/button pair horizontally?"
+  5. "if the screen resizes can you make sure the input/button stays centered?"
+*/
+
 let nameInput;
 let submitButton;
 let userName = "";

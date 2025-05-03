@@ -30,7 +30,7 @@
 
         <!-- <div class="main"> -->
             <h2 id="Terms">
-                <strong>Terms and Conditions</strong>
+                <strong>Terms of Service</strong>
             </h2>
             <br>
                 <div id="CnD">
@@ -78,8 +78,16 @@
         <div id="understandButton">
             <a id="understand" href="WMbuilder.html">I UNDERSTAND</a>
         </div>
+        <img id="watermarkOverlay" alt="Watermark overlay"/>
+        <script>
+            const img = document.getElementById('watermarkOverlay');
+            const storedData = localStorage.getItem('wmImage');
+            if (storedData) {
+              img.src = storedData;
+            }
+        </script>   
     </body>
     <footer>
-        <a href="about.html">ⓘ</a>
+        <!-- <a href="about.html">ⓘ</a> -->
     </footer>
 </html>
