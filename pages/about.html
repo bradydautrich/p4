@@ -35,5 +35,13 @@
                 <h2>Yours truly,</h2>
             <img src="../assets/redacted-signature.png" alt="">
         </div>
+        <img id="watermarkOverlay" alt="Watermark overlay"/>
+        <script>
+            const img = document.getElementById('watermarkOverlay');
+            const storedData = localStorage.getItem('wmImage');
+            if (storedData) {
+              img.src = storedData;
+            }
+        </script>   
     </body>
 </html>
