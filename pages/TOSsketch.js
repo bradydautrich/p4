@@ -12,7 +12,7 @@ var arrowX, arrowY;
 var escapeDistance = 200;
 var maxSpeed = 100;
 var padding = 50;
-var dropdownWidth = 275;
+var dropdownWidth = 475;
 var dropdownHeight = 30;
 var leaveMeAlone = false;
 var courier;
@@ -28,13 +28,13 @@ function setup() {
   arrowY = height / 2;
 
   dropdown = createSelect();
-  dropdown.option('Click to see Terms of Service');
-  dropdown.option('LEAVE ME ALONE');
+  dropdown.option('You will have to catch me to see the Terms of Service');
+  dropdown.option('Stop trying and just agree already');
   dropdown.position(arrowX, arrowY);
   dropdown.size(dropdownWidth, dropdownHeight);
   dropdown.style('font-family', 'CourierStd');
   dropdown.changed(() => {
-    if (dropdown.value() === 'LEAVE ME ALONE') {
+    if (dropdown.value() === 'Stop trying and just agree already') {
       leaveMeAlone = true;
       dropdown.style('color', 'white');
       dropdown.style('font-weight', 'bold');
@@ -53,27 +53,32 @@ function mouseMoved() {
 
   var d = dist(mouseX, mouseY, arrowX + dropdownWidth/2, arrowY + dropdownHeight/2);
 
-  // Always move if mouse is close, even if overlapping
   if (d < escapeDistance) {
-    // Closer = faster escape
-    var speed = map(d, escapeDistance, 0, 0, maxSpeed * 2); 
-    speed = constrain(speed, 5, maxSpeed * 2); // Always have some minimum speed
+    let baseAngle = atan2(arrowY + dropdownHeight/2 - mouseY, arrowX + dropdownWidth/2 - mouseX);
 
-    var angle = atan2(arrowY + dropdownHeight/2 - mouseY, arrowX + dropdownWidth/2 - mouseX);
+    // Add randomness to angle
+    let wiggle = random(-PI / 3, PI / 3); // random offset
+    let angle = baseAngle + wiggle;
 
-    // Nudge angle if near edge
-    if (arrowX < padding) angle -= 0.5;
-    if (arrowX > width - padding) angle += 0.5;
-    if (arrowY < padding) angle += 0.5;
-    if (arrowY > height - padding) angle -= 0.5;
+    // Accelerate based on closeness
+    let speed = map(d, escapeDistance, 0, maxSpeed / 2, maxSpeed * 2);
+    speed = constrain(speed, maxSpeed / 2, maxSpeed * 2);
 
-    var escapeVector = createVector(cos(angle), sin(angle)).mult(speed);
+    let escapeVector = createVector(cos(angle), sin(angle)).mult(speed);
+
     arrowX += escapeVector.x;
     arrowY += escapeVector.y;
 
-    // Keep inside window
-    arrowX = constrain(arrowX, padding, windowWidth - padding - dropdownWidth);
-    arrowY = constrain(arrowY, padding, windowHeight - padding - dropdownHeight);
+    // Add jitter
+    arrowX += random(-5, 5);
+    arrowY += random(-5, 5);
+
+    // Bounce off walls with force
+    if (arrowX < padding || arrowX > width - padding - dropdownWidth ||
+        arrowY < padding || arrowY > height - padding - dropdownHeight) {
+      arrowX = random(padding, width - padding - dropdownWidth);
+      arrowY = random(padding, height - padding - dropdownHeight);
+    }
 
     dropdown.position(arrowX, arrowY);
   }
